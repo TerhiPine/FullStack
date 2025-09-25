@@ -1,12 +1,17 @@
-const http = require("http");
+// server.js
+const http = require('http');
 
-http.createServer(function (request, response) {
-    // Tell the browser we are sending an HTML page
-    response.writeHead(200, {'Content-Type': 'text/html'});
+const server = http.createServer((request, response) => {
+  response.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
+  // added 'chatset=utf-8' so ääkköset are working correctly.
+  response.write('<table border="1" style="border-collapse: collapse; width: 100%;">');
+  response.write('<tr><th>Name</th><th>Address</th><th>City</th></tr>');
+  response.write('<tr><td>Matti Meikäläinen</td><td>Timotie 1, as 10</td><td>Tampere</td></tr>');
+  response.write('<tr><td>Maija Virtanen</td><td>Asematie 12</td><td>Kiljava</td></tr>');
+  response.write('</table>');
+  response.end();
+});
 
-    // Send the HTML content
-    response.end('My First Node.js Server');
+server.listen(8081);
 
-}).listen(8081); // The server will listen on "port 8081"
-
-console.log('Server is running at http://127.0.0.1:8081/');
+console.log('Server running at http://127.0.0.1:8081/');
